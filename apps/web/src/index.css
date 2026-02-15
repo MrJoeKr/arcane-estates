@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  --color-arcane-gold: #d4a843;
+  --color-arcane-purple: #7b2d8e;
+  --color-arcane-deep: #1a0a2e;
+  --color-arcane-dark: #0d0520;
+  --color-parchment: #f4e4c1;
+  --color-parchment-dark: #c9a96e;
+}
+
+@theme {
+  --color-arcane-gold: #d4a843;
+  --color-arcane-purple: #7b2d8e;
+  --color-arcane-deep: #1a0a2e;
+  --color-arcane-dark: #0d0520;
+  --color-parchment: #f4e4c1;
+  --color-parchment-dark: #c9a96e;
+
+  --color-prop-brown: #8B4513;
+  --color-prop-lightblue: #87CEEB;
+  --color-prop-pink: #FF69B4;
+  --color-prop-orange: #FF8C00;
+  --color-prop-red: #DC143C;
+  --color-prop-yellow: #FFD700;
+  --color-prop-green: #228B22;
+  --color-prop-darkblue: #191970;
+  --color-prop-portal: #4a4a4a;
+  --color-prop-mana: #9370DB;
+}
+
+body {
+  font-family: "Crimson Text", serif;
+  background: var(--color-arcane-dark);
+  color: white;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-display {
+  font-family: "Cinzel", serif;
+}
+
+/* Magical background gradient */
+.bg-magical {
+  background: radial-gradient(ellipse at center, var(--color-arcane-deep) 0%, var(--color-arcane-dark) 70%);
+}
+
+/* Gold text glow */
+.text-glow-gold {
+  text-shadow: 0 0 10px rgba(212, 168, 67, 0.5), 0 0 20px rgba(212, 168, 67, 0.3);
+}
+
+/* Card shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 67, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Dice roll animation */
+@keyframes dice-roll {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(720deg) rotateY(720deg); }
+}
+
+.animate-dice-roll {
+  animation: dice-roll 0.8s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-arcane-gold);
+  border-radius: 3px;
+}
