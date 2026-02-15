@@ -41,9 +41,13 @@ export class GameRoom extends Room<GameState> {
 
   onCreate(options: any) {
     this.setState(new GameState());
-    this.state.roomCode = generateRoomCode();
+    const roomCode = generateRoomCode();
+    this.state.roomCode = roomCode;
     this.state.phase = "lobby";
     this.maxClients = MAX_PLAYERS;
+
+    // Expose roomCode in metadata so clients can find this room by code
+    this.setMetadata({ roomCode });
 
     // Initialize all 40 spaces
     for (let i = 0; i < 40; i++) {

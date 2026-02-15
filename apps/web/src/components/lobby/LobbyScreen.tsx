@@ -35,7 +35,7 @@ export function LobbyScreen({ room, gameState }: LobbyScreenProps) {
         <div className="bg-arcane-deep/80 border border-arcane-gold/30 rounded-lg p-6">
           <p className="text-gray-400 text-sm mb-1">Room Code</p>
           <p className="font-display text-3xl tracking-[0.3em] text-arcane-gold font-bold">
-            {gameState.roomCode || room.roomId}
+            {room.roomId}
           </p>
           <p className="text-gray-500 text-xs mt-2">
             Share this code with other wizards

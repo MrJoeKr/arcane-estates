@@ -70,9 +70,9 @@ export function HomePage({ onCreateGame, onJoinGame, error }: HomePageProps) {
                 type="text"
                 placeholder="Room code..."
                 value={roomCode}
-                onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-                maxLength={10}
-                className="w-full px-4 py-3 bg-arcane-deep/80 border border-arcane-gold/30 rounded-lg text-white placeholder-gray-500 focus:border-arcane-gold focus:outline-none font-display text-center tracking-widest uppercase"
+                onChange={(e) => setRoomCode(e.target.value)}
+                maxLength={20}
+                className="w-full px-4 py-3 bg-arcane-deep/80 border border-arcane-gold/30 rounded-lg text-white placeholder-gray-500 focus:border-arcane-gold focus:outline-none font-display text-center tracking-widest"
               />
             )}
 

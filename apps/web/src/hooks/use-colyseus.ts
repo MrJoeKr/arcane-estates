@@ -127,13 +127,13 @@ export function useColyseus() {
   const roomRef = useRef<Room | null>(null);
 
   const connect = useCallback(
-    async (playerName: string, roomCode?: string) => {
+    async (playerName: string, roomId?: string): Promise<boolean> => {
       try {
         setError(null);
         let joinedRoom: Room;
 
-        if (roomCode) {
-          joinedRoom = await colyseusClient.joinById(roomCode, {
+        if (roomId) {
+          joinedRoom = await colyseusClient.joinById(roomId, {
             name: playerName,
           });
         } else {
@@ -165,8 +165,11 @@ export function useColyseus() {
             setError("Disconnected from server");
           }
         });
+
+        return true;
       } catch (err: any) {
         setError(err.message || "Failed to connect");
+        return false;
       }
     },
     []

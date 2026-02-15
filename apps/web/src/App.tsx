@@ -11,13 +11,13 @@ export default function App() {
   const { room, gameState, connect, error, send, logs } = useColyseus();
 
   const handleCreate = async (playerName: string) => {
-    await connect(playerName, undefined);
-    setScreen("lobby");
+    const ok = await connect(playerName, undefined);
+    if (ok) setScreen("lobby");
   };
 
-  const handleJoin = async (playerName: string, roomCode: string) => {
-    await connect(playerName, roomCode);
-    setScreen("lobby");
+  const handleJoin = async (playerName: string, roomId: string) => {
+    const ok = await connect(playerName, roomId);
+    if (ok) setScreen("lobby");
   };
 
   // Auto-transition to game when phase changes
