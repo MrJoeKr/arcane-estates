@@ -35,7 +35,13 @@ export function DiceRoll({ dice, onRoll, canRoll }: DiceRollProps) {
       <div className="flex gap-3">
         <div className="relative">
           <motion.div
-            className="w-12 h-12 bg-parchment rounded-lg flex items-center justify-center text-3xl shadow-lg border-2 border-parchment-dark"
+            className="w-14 h-14 rounded-lg flex items-center justify-center text-3xl border"
+            style={{
+              background: "linear-gradient(145deg, #F4E4C1, #C9A96E)",
+              borderColor: "rgba(155, 122, 48, 0.6)",
+              boxShadow:
+                "0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3)",
+            }}
             animate={
               isDiceRolling
                 ? {
@@ -47,7 +53,7 @@ export function DiceRoll({ dice, onRoll, canRoll }: DiceRollProps) {
             }
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span className="text-arcane-dark">
+            <span className="text-arcane-dark font-bold">
               {dice[0] > 0 ? DICE_FACES[dice[0]] : "?"}
             </span>
           </motion.div>
@@ -55,9 +61,9 @@ export function DiceRoll({ dice, onRoll, canRoll }: DiceRollProps) {
           <AnimatePresence>
             {hasRolled && (
               <motion.div
-                className="absolute inset-0 rounded-lg border-2 border-arcane-gold/60"
+                className="absolute inset-0 rounded-lg border-2 border-arcane-gold/50"
                 initial={{ scale: 1, opacity: 0.8 }}
-                animate={{ scale: 1.4, opacity: 0 }}
+                animate={{ scale: 1.5, opacity: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6 }}
               />
@@ -66,7 +72,13 @@ export function DiceRoll({ dice, onRoll, canRoll }: DiceRollProps) {
         </div>
         <div className="relative">
           <motion.div
-            className="w-12 h-12 bg-parchment rounded-lg flex items-center justify-center text-3xl shadow-lg border-2 border-parchment-dark"
+            className="w-14 h-14 rounded-lg flex items-center justify-center text-3xl border"
+            style={{
+              background: "linear-gradient(145deg, #F4E4C1, #C9A96E)",
+              borderColor: "rgba(155, 122, 48, 0.6)",
+              boxShadow:
+                "0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3)",
+            }}
             animate={
               isDiceRolling
                 ? {
@@ -78,7 +90,7 @@ export function DiceRoll({ dice, onRoll, canRoll }: DiceRollProps) {
             }
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
           >
-            <span className="text-arcane-dark">
+            <span className="text-arcane-dark font-bold">
               {dice[1] > 0 ? DICE_FACES[dice[1]] : "?"}
             </span>
           </motion.div>
@@ -86,9 +98,9 @@ export function DiceRoll({ dice, onRoll, canRoll }: DiceRollProps) {
           <AnimatePresence>
             {hasRolled && (
               <motion.div
-                className="absolute inset-0 rounded-lg border-2 border-arcane-gold/60"
+                className="absolute inset-0 rounded-lg border-2 border-arcane-gold/50"
                 initial={{ scale: 1, opacity: 0.8 }}
-                animate={{ scale: 1.4, opacity: 0 }}
+                animate={{ scale: 1.5, opacity: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               />
@@ -99,11 +111,11 @@ export function DiceRoll({ dice, onRoll, canRoll }: DiceRollProps) {
 
       {dice[0] > 0 && (
         <div className="text-center">
-          <span className="text-white font-display text-sm">
+          <span className="font-display text-base text-parchment/90">
             {dice[0] + dice[1]}
           </span>
           {isDoubles && (
-            <span className="ml-2 text-arcane-gold text-sm font-display font-bold text-glow-gold">
+            <span className="ml-2 text-arcane-gold text-glow-gold font-bold font-display text-base">
               DOUBLES!
             </span>
           )}
@@ -114,7 +126,7 @@ export function DiceRoll({ dice, onRoll, canRoll }: DiceRollProps) {
         <motion.button
           onClick={handleRoll}
           disabled={isDiceRolling}
-          className="btn-arcane px-6 py-2 bg-arcane-purple hover:bg-arcane-purple/80 text-white font-display rounded-lg border border-arcane-gold/30 hover:border-arcane-gold transition-all hover:shadow-[0_0_15px_rgba(212,168,67,0.3)] disabled:opacity-50"
+          className="btn-arcane btn-primary px-8 py-2.5 rounded-xl text-base animate-breathe disabled:opacity-50"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

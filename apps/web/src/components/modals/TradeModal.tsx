@@ -65,20 +65,20 @@ export function TradeModal({
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="modal-container modal-ornament-tl modal-ornament-br relative w-80 p-4 space-y-3 shimmer"
+          className="modal-container ornament-corners shimmer relative w-80 p-5"
           onClick={(e) => e.stopPropagation()}
         >
-          <h3 className="font-display text-arcane-gold text-center">
+          <h3 className="font-display text-arcane-gold text-glow-gold-subtle text-center">
             Trade Offer from {fromPlayer?.name}
           </h3>
 
-          <div className="divider-gold" />
+          <div className="divider-gold my-3" />
 
           <div className="grid grid-cols-[1fr_auto_1fr] gap-2 text-xs">
             <div>
-              <p className="text-gray-400 mb-1">They offer:</p>
+              <p className="text-parchment/50 mb-1">They offer:</p>
               {gameState.trade.offerProperties.map((i) => (
-                <p key={i} className="text-white">
+                <p key={i} className="text-parchment">
                   {BOARD_SPACES[i]?.name}
                 </p>
               ))}
@@ -88,11 +88,11 @@ export function TradeModal({
                 </p>
               )}
             </div>
-            <div className="w-px bg-arcane-gold/20 self-stretch" />
+            <div className="w-px bg-arcane-gold/15 self-stretch" />
             <div>
-              <p className="text-gray-400 mb-1">They want:</p>
+              <p className="text-parchment/50 mb-1">They want:</p>
               {gameState.trade.requestProperties.map((i) => (
-                <p key={i} className="text-white">
+                <p key={i} className="text-parchment">
                   {BOARD_SPACES[i]?.name}
                 </p>
               ))}
@@ -104,13 +104,13 @@ export function TradeModal({
             </div>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-4">
             <button
               onClick={() => {
                 send("accept_trade");
                 onClose();
               }}
-              className="btn-arcane flex-1 py-2 bg-green-700 hover:bg-green-600 text-white font-display text-sm rounded border border-green-500/50 hover:shadow-[0_0_12px_rgba(34,197,94,0.3)]"
+              className="btn-arcane btn-success flex-1 py-2 rounded-lg text-sm"
             >
               Accept
             </button>
@@ -119,7 +119,7 @@ export function TradeModal({
                 send("reject_trade");
                 onClose();
               }}
-              className="btn-arcane flex-1 py-2 bg-red-800 hover:bg-red-700 text-white font-display text-sm rounded border border-red-500/50 hover:shadow-[0_0_12px_rgba(239,68,68,0.3)]"
+              className="btn-arcane btn-danger flex-1 py-2 rounded-lg text-sm"
             >
               Reject
             </button>
@@ -137,22 +137,22 @@ export function TradeModal({
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="modal-container modal-ornament-tl modal-ornament-br relative w-96 max-h-[80vh] overflow-y-auto p-4 space-y-4"
+        className="modal-container ornament-corners relative w-96 max-h-[80vh] overflow-y-auto p-5"
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="font-display text-arcane-gold text-center text-lg">
+        <h3 className="font-display text-arcane-gold text-glow-gold-subtle text-center text-lg">
           Propose Trade
         </h3>
 
-        <div className="divider-gold" />
+        <div className="divider-gold my-3" />
 
         {/* Target Selection */}
-        <div>
-          <label className="text-gray-400 text-xs">Trade with:</label>
+        <div className="mb-3">
+          <label className="text-parchment/50 text-xs">Trade with:</label>
           <select
             value={targetId}
             onChange={(e) => setTargetId(e.target.value)}
-            className="w-full mt-1 px-2 py-1.5 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-sm focus:border-arcane-gold/50 focus:outline-none"
+            className="input-arcane w-full text-sm mt-1"
           >
             {otherPlayers.map((p) => (
               <option key={p.id} value={p.id}>
@@ -165,11 +165,11 @@ export function TradeModal({
         <div className="grid grid-cols-[1fr_auto_1fr] gap-3">
           {/* Your offer */}
           <div>
-            <p className="text-gray-400 text-xs mb-1">You offer:</p>
+            <p className="text-parchment/50 text-xs mb-1">You offer:</p>
             {myPlayer.properties.map((i) => (
               <label
                 key={i}
-                className="flex items-center gap-1.5 text-xs text-white cursor-pointer py-0.5"
+                className="flex items-center gap-1.5 text-xs text-parchment cursor-pointer py-0.5"
               >
                 <input
                   type="checkbox"
@@ -181,28 +181,28 @@ export function TradeModal({
               </label>
             ))}
             <div className="mt-2">
-              <label className="text-gray-400 text-[10px]">Crowns:</label>
+              <label className="text-parchment/40 text-[10px]">Crowns:</label>
               <input
                 type="number"
                 min={0}
                 max={myPlayer.crowns}
                 value={offerCrowns}
                 onChange={(e) => setOfferCrowns(Number(e.target.value))}
-                className="w-full mt-0.5 px-2 py-1 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-xs focus:border-arcane-gold/50 focus:outline-none"
+                className="input-arcane text-xs w-full mt-0.5"
               />
             </div>
           </div>
 
           {/* Visual divider */}
-          <div className="w-px bg-arcane-gold/20 self-stretch" />
+          <div className="w-px bg-arcane-gold/15 self-stretch" />
 
           {/* You request */}
           <div>
-            <p className="text-gray-400 text-xs mb-1">You want:</p>
+            <p className="text-parchment/50 text-xs mb-1">You want:</p>
             {targetPlayer?.properties.map((i) => (
               <label
                 key={i}
-                className="flex items-center gap-1.5 text-xs text-white cursor-pointer py-0.5"
+                className="flex items-center gap-1.5 text-xs text-parchment cursor-pointer py-0.5"
               >
                 <input
                   type="checkbox"
@@ -216,29 +216,29 @@ export function TradeModal({
               </label>
             ))}
             <div className="mt-2">
-              <label className="text-gray-400 text-[10px]">Crowns:</label>
+              <label className="text-parchment/40 text-[10px]">Crowns:</label>
               <input
                 type="number"
                 min={0}
                 max={targetPlayer?.crowns || 0}
                 value={requestCrowns}
                 onChange={(e) => setRequestCrowns(Number(e.target.value))}
-                className="w-full mt-0.5 px-2 py-1 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-xs focus:border-arcane-gold/50 focus:outline-none"
+                className="input-arcane text-xs w-full mt-0.5"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-4">
           <button
             onClick={onClose}
-            className="btn-arcane flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 font-display text-sm rounded"
+            className="btn-arcane btn-ghost flex-1 py-2 rounded-lg text-sm"
           >
             Cancel
           </button>
           <button
             onClick={handlePropose}
-            className="btn-arcane flex-1 py-2 bg-arcane-purple hover:bg-arcane-purple/80 text-white font-display text-sm rounded border border-arcane-gold/30 hover:shadow-[0_0_12px_rgba(123,45,142,0.3)]"
+            className="btn-arcane btn-primary flex-1 py-2 rounded-lg text-sm"
           >
             Propose
           </button>
