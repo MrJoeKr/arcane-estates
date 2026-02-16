@@ -22,19 +22,19 @@ export function ActionPanel({
   if (!player || player.bankrupt) return null;
 
   return (
-    <div className="flex flex-wrap gap-2 justify-center">
+    <div className="flex flex-wrap gap-2 justify-center min-h-[40px] items-center">
       {/* Buy Property */}
       {isMyTurn && turnPhase === "postRoll" && (
         <>
           <button
             onClick={() => send("buy_property")}
-            className="px-3 py-1.5 bg-green-700 hover:bg-green-600 text-white text-xs font-display rounded border border-green-500/50 transition-colors"
+            className="btn-arcane px-4 py-2 bg-green-700 hover:bg-green-600 text-white text-sm font-display rounded border border-green-500/50 transition-colors hover:shadow-[0_0_12px_rgba(34,197,94,0.3)]"
           >
             Buy Property
           </button>
           <button
             onClick={() => send("decline_property")}
-            className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs font-display rounded border border-gray-500/50 transition-colors"
+            className="btn-arcane px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 text-sm font-display rounded border border-gray-500/50 transition-colors"
           >
             Decline (Auction)
           </button>
@@ -46,14 +46,14 @@ export function ActionPanel({
         <>
           <button
             onClick={() => send("pay_jail_fine")}
-            className="px-3 py-1.5 bg-yellow-700 hover:bg-yellow-600 text-white text-xs font-display rounded border border-yellow-500/50 transition-colors"
+            className="btn-arcane px-4 py-2 bg-yellow-700 hover:bg-yellow-600 text-white text-sm font-display rounded border border-yellow-500/50 transition-colors"
           >
-            Pay ♛50 Fine
+            Pay {"\u265B"}50 Fine
           </button>
           {player.hasEscapeCard && (
             <button
               onClick={() => send("use_escape_card")}
-              className="px-3 py-1.5 bg-arcane-purple hover:bg-arcane-purple/80 text-white text-xs font-display rounded border border-arcane-gold/30 transition-colors"
+              className="btn-arcane px-4 py-2 bg-arcane-purple hover:bg-arcane-purple/80 text-white text-sm font-display rounded border border-arcane-gold/30 transition-colors"
             >
               Use Escape Card
             </button>
@@ -65,7 +65,7 @@ export function ActionPanel({
       {isMyTurn && (turnPhase === "action" || turnPhase === "postRoll") && (
         <button
           onClick={() => setShowTradeModal(true)}
-          className="px-3 py-1.5 bg-blue-700 hover:bg-blue-600 text-white text-xs font-display rounded border border-blue-500/50 transition-colors"
+          className="btn-arcane px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white text-sm font-display rounded border border-blue-500/50 transition-colors"
         >
           Trade
         </button>
@@ -76,7 +76,7 @@ export function ActionPanel({
         (turnPhase === "action" || turnPhase === "endTurn") && (
           <button
             onClick={() => send("end_turn")}
-            className="px-3 py-1.5 bg-red-800 hover:bg-red-700 text-white text-xs font-display rounded border border-red-500/50 transition-colors"
+            className="btn-arcane px-4 py-2 bg-red-800 hover:bg-red-700 text-white text-sm font-display rounded border border-red-500/50 transition-colors hover:shadow-[0_0_12px_rgba(239,68,68,0.3)]"
           >
             End Turn
           </button>

@@ -59,20 +59,22 @@ export function TradeModal({
     const fromPlayer = gameState.players.get(gameState.trade.fromId);
     return (
       <div
-        className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+        className="fixed inset-0 modal-backdrop flex items-center justify-center z-50"
         onClick={onClose}
       >
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="bg-arcane-deep border-2 border-arcane-gold/40 rounded-xl w-80 p-4 space-y-3"
+          className="modal-container modal-ornament-tl modal-ornament-br relative w-80 p-4 space-y-3 shimmer"
           onClick={(e) => e.stopPropagation()}
         >
           <h3 className="font-display text-arcane-gold text-center">
             Trade Offer from {fromPlayer?.name}
           </h3>
 
-          <div className="grid grid-cols-2 gap-4 text-xs">
+          <div className="divider-gold" />
+
+          <div className="grid grid-cols-[1fr_auto_1fr] gap-2 text-xs">
             <div>
               <p className="text-gray-400 mb-1">They offer:</p>
               {gameState.trade.offerProperties.map((i) => (
@@ -82,10 +84,11 @@ export function TradeModal({
               ))}
               {gameState.trade.offerCrowns > 0 && (
                 <p className="text-arcane-gold">
-                  ♛{gameState.trade.offerCrowns}
+                  {"\u265B"}{gameState.trade.offerCrowns}
                 </p>
               )}
             </div>
+            <div className="w-px bg-arcane-gold/20 self-stretch" />
             <div>
               <p className="text-gray-400 mb-1">They want:</p>
               {gameState.trade.requestProperties.map((i) => (
@@ -95,7 +98,7 @@ export function TradeModal({
               ))}
               {gameState.trade.requestCrowns > 0 && (
                 <p className="text-arcane-gold">
-                  ♛{gameState.trade.requestCrowns}
+                  {"\u265B"}{gameState.trade.requestCrowns}
                 </p>
               )}
             </div>
@@ -107,7 +110,7 @@ export function TradeModal({
                 send("accept_trade");
                 onClose();
               }}
-              className="flex-1 py-2 bg-green-700 hover:bg-green-600 text-white font-display text-sm rounded border border-green-500/50"
+              className="btn-arcane flex-1 py-2 bg-green-700 hover:bg-green-600 text-white font-display text-sm rounded border border-green-500/50 hover:shadow-[0_0_12px_rgba(34,197,94,0.3)]"
             >
               Accept
             </button>
@@ -116,7 +119,7 @@ export function TradeModal({
                 send("reject_trade");
                 onClose();
               }}
-              className="flex-1 py-2 bg-red-800 hover:bg-red-700 text-white font-display text-sm rounded border border-red-500/50"
+              className="btn-arcane flex-1 py-2 bg-red-800 hover:bg-red-700 text-white font-display text-sm rounded border border-red-500/50 hover:shadow-[0_0_12px_rgba(239,68,68,0.3)]"
             >
               Reject
             </button>
@@ -128,18 +131,20 @@ export function TradeModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+      className="fixed inset-0 modal-backdrop flex items-center justify-center z-50"
       onClick={onClose}
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-arcane-deep border-2 border-arcane-gold/40 rounded-xl w-96 max-h-[80vh] overflow-y-auto p-4 space-y-4"
+        className="modal-container modal-ornament-tl modal-ornament-br relative w-96 max-h-[80vh] overflow-y-auto p-4 space-y-4"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="font-display text-arcane-gold text-center text-lg">
           Propose Trade
         </h3>
+
+        <div className="divider-gold" />
 
         {/* Target Selection */}
         <div>
@@ -147,29 +152,30 @@ export function TradeModal({
           <select
             value={targetId}
             onChange={(e) => setTargetId(e.target.value)}
-            className="w-full mt-1 px-2 py-1.5 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-sm"
+            className="w-full mt-1 px-2 py-1.5 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-sm focus:border-arcane-gold/50 focus:outline-none"
           >
             {otherPlayers.map((p) => (
               <option key={p.id} value={p.id}>
-                {TOKEN_EMOJIS[p.token]} {p.name} (♛{p.crowns})
+                {TOKEN_EMOJIS[p.token]} {p.name} ({"\u265B"}{p.crowns})
               </option>
             ))}
           </select>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-[1fr_auto_1fr] gap-3">
           {/* Your offer */}
           <div>
             <p className="text-gray-400 text-xs mb-1">You offer:</p>
             {myPlayer.properties.map((i) => (
               <label
                 key={i}
-                className="flex items-center gap-1 text-xs text-white cursor-pointer"
+                className="flex items-center gap-1.5 text-xs text-white cursor-pointer py-0.5"
               >
                 <input
                   type="checkbox"
                   checked={offerProps.includes(i)}
                   onChange={() => toggleProp(offerProps, setOfferProps, i)}
+                  className="accent-arcane-gold"
                 />
                 {BOARD_SPACES[i]?.name}
               </label>
@@ -182,10 +188,13 @@ export function TradeModal({
                 max={myPlayer.crowns}
                 value={offerCrowns}
                 onChange={(e) => setOfferCrowns(Number(e.target.value))}
-                className="w-full mt-0.5 px-2 py-1 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-xs"
+                className="w-full mt-0.5 px-2 py-1 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-xs focus:border-arcane-gold/50 focus:outline-none"
               />
             </div>
           </div>
+
+          {/* Visual divider */}
+          <div className="w-px bg-arcane-gold/20 self-stretch" />
 
           {/* You request */}
           <div>
@@ -193,7 +202,7 @@ export function TradeModal({
             {targetPlayer?.properties.map((i) => (
               <label
                 key={i}
-                className="flex items-center gap-1 text-xs text-white cursor-pointer"
+                className="flex items-center gap-1.5 text-xs text-white cursor-pointer py-0.5"
               >
                 <input
                   type="checkbox"
@@ -201,6 +210,7 @@ export function TradeModal({
                   onChange={() =>
                     toggleProp(requestProps, setRequestProps, i)
                   }
+                  className="accent-arcane-gold"
                 />
                 {BOARD_SPACES[i]?.name}
               </label>
@@ -213,7 +223,7 @@ export function TradeModal({
                 max={targetPlayer?.crowns || 0}
                 value={requestCrowns}
                 onChange={(e) => setRequestCrowns(Number(e.target.value))}
-                className="w-full mt-0.5 px-2 py-1 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-xs"
+                className="w-full mt-0.5 px-2 py-1 bg-arcane-dark border border-arcane-gold/20 rounded text-white text-xs focus:border-arcane-gold/50 focus:outline-none"
               />
             </div>
           </div>
@@ -222,13 +232,13 @@ export function TradeModal({
         <div className="flex gap-2">
           <button
             onClick={onClose}
-            className="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 font-display text-sm rounded"
+            className="btn-arcane flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 font-display text-sm rounded"
           >
             Cancel
           </button>
           <button
             onClick={handlePropose}
-            className="flex-1 py-2 bg-arcane-purple hover:bg-arcane-purple/80 text-white font-display text-sm rounded border border-arcane-gold/30"
+            className="btn-arcane flex-1 py-2 bg-arcane-purple hover:bg-arcane-purple/80 text-white font-display text-sm rounded border border-arcane-gold/30 hover:shadow-[0_0_12px_rgba(123,45,142,0.3)]"
           >
             Propose
           </button>

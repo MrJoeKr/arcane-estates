@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { HomePage } from "./components/home/HomePage";
 import { LobbyScreen } from "./components/lobby/LobbyScreen";
 import { Board } from "./components/board/Board";
@@ -31,19 +32,45 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      {screen === "home" && (
-        <HomePage
-          onCreateGame={handleCreate}
-          onJoinGame={handleJoin}
-          error={error}
-        />
-      )}
-      {screen === "lobby" && room && gameState && (
-        <LobbyScreen room={room} gameState={gameState} />
-      )}
-      {screen === "game" && room && gameState && (
-        <Board room={room} gameState={gameState} send={send} logs={logs} />
-      )}
+      <AnimatePresence mode="wait">
+        {screen === "home" && (
+          <motion.div
+            key="home"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <HomePage
+              onCreateGame={handleCreate}
+              onJoinGame={handleJoin}
+              error={error}
+            />
+          </motion.div>
+        )}
+        {screen === "lobby" && room && gameState && (
+          <motion.div
+            key="lobby"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <LobbyScreen room={room} gameState={gameState} />
+          </motion.div>
+        )}
+        {screen === "game" && room && gameState && (
+          <motion.div
+            key="game"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Board room={room} gameState={gameState} send={send} logs={logs} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
