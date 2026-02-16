@@ -20,10 +20,10 @@ export function CardReveal({ card, onClose }: CardRevealProps) {
           animate={{ rotateY: 0, opacity: 1 }}
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: "spring", damping: 15 }}
-          className={`modal-ornament-tl modal-ornament-br relative w-72 rounded-xl overflow-hidden shadow-2xl border-2 ${
+          className={`ornament-corners relative w-72 rounded-xl overflow-hidden shadow-2xl border-2 ${
             isFate
-              ? "border-purple-500/60 bg-gradient-to-b from-purple-900 to-arcane-deep"
-              : "border-amber-500/60 bg-gradient-to-b from-amber-900 to-arcane-deep"
+              ? "border-arcane-purple-light/50 bg-gradient-to-b from-purple-900/95 to-arcane-deep/98"
+              : "border-arcane-gold/50 bg-gradient-to-b from-amber-900/95 to-arcane-deep/98"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
@@ -45,7 +45,7 @@ export function CardReveal({ card, onClose }: CardRevealProps) {
           {/* Card text with shimmer */}
           <div className="p-6 relative">
             <div className="absolute inset-0 shimmer pointer-events-none" />
-            <p className="text-white text-center text-base leading-relaxed italic relative z-10">
+            <p className="text-parchment text-center text-base leading-relaxed italic relative z-10">
               "{card.text}"
             </p>
           </div>
@@ -53,7 +53,7 @@ export function CardReveal({ card, onClose }: CardRevealProps) {
           {/* Close */}
           <button
             onClick={onClose}
-            className={`btn-arcane w-full py-3 font-display text-sm ${
+            className={`btn-arcane w-full py-3 text-sm ${
               isFate
                 ? "bg-purple-800/30 hover:bg-purple-800/50 text-purple-300"
                 : "bg-amber-800/30 hover:bg-amber-800/50 text-amber-300"

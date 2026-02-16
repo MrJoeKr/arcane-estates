@@ -38,15 +38,20 @@ export function Board({ room, gameState, send, logs }: BoardProps) {
   const isMyTurn = gameState.currentPlayerId === room.sessionId;
 
   return (
-    <div className="min-h-screen bg-magical p-4">
-      <div className="max-w-[1400px] mx-auto">
+    <div className="min-h-screen bg-magical flex items-center justify-center p-3">
+      <div className="relative z-10 max-w-[1400px] w-full mx-auto">
         {/* Board Grid */}
         <div
-          className="grid gap-0 border-2 border-arcane-gold/40 rounded-lg overflow-hidden bg-arcane-deep/80 shadow-[0_0_40px_rgba(212,168,67,0.08)]"
+          className="grid gap-0 rounded-xl overflow-hidden relative"
           style={{
             gridTemplateColumns: "1.6fr repeat(9, 1fr) 1.6fr",
             gridTemplateRows: "1.6fr repeat(9, 1fr) 1.6fr",
             aspectRatio: "1",
+            border: "1.5px solid rgba(212, 168, 67, 0.25)",
+            boxShadow:
+              "0 0 60px rgba(212, 168, 67, 0.06), 0 0 120px rgba(123, 45, 142, 0.04), inset 0 0 60px rgba(0,0,0,0.3)",
+            background:
+              "linear-gradient(135deg, rgba(13, 5, 32, 0.9), rgba(26, 10, 46, 0.85))",
           }}
         >
           {/* Render all 40 board spaces */}
@@ -72,7 +77,7 @@ export function Board({ room, gameState, send, logs }: BoardProps) {
 
           {/* Center area */}
           <div
-            className="flex flex-col items-center justify-between gap-2 p-4 bg-arcane-dark/40 rounded-lg border border-arcane-gold/10"
+            className="glass-panel flex flex-col items-center justify-between p-4 m-1"
             style={{
               gridRow: "2 / 11",
               gridColumn: "2 / 11",
@@ -80,7 +85,7 @@ export function Board({ room, gameState, send, logs }: BoardProps) {
           >
             {/* Top zone: Title + Dice */}
             <div className="flex flex-col items-center gap-2">
-              <h2 className="font-display text-2xl text-arcane-gold text-glow-gold-pulse">
+              <h2 className="font-title text-xl text-arcane-gold text-glow-gold-subtle">
                 Arcane Estates
               </h2>
 
@@ -92,7 +97,7 @@ export function Board({ room, gameState, send, logs }: BoardProps) {
             </div>
 
             {/* Middle zone: Player Panel */}
-            <div className="w-full max-w-sm">
+            <div className="w-full max-w-xs">
               <PlayerPanel
                 players={players}
                 currentPlayerId={gameState.currentPlayerId}
@@ -101,7 +106,7 @@ export function Board({ room, gameState, send, logs }: BoardProps) {
             </div>
 
             {/* Bottom zone: Actions + Log */}
-            <div className="flex flex-col items-center gap-2 w-full">
+            <div className="w-full flex flex-col gap-2">
               <ActionPanel
                 room={room}
                 gameState={gameState}

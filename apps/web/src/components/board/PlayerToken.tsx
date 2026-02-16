@@ -8,11 +8,11 @@ interface PlayerTokenProps {
 
 export function PlayerToken({ player }: PlayerTokenProps) {
   const [row, col] = BOARD_GRID_POSITIONS[player.position] ?? [1, 1];
-  const emoji = TOKEN_EMOJIS[player.token] || "⚪";
+  const emoji = TOKEN_EMOJIS[player.token] || "\u26AA";
 
   return (
     <motion.div
-      className="absolute z-10 text-lg pointer-events-none"
+      className="absolute z-10 text-xl pointer-events-none drop-shadow-[0_0_4px_rgba(212,168,67,0.4)]"
       animate={{
         gridRow: row,
         gridColumn: col,

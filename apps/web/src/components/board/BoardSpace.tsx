@@ -49,12 +49,12 @@ export function BoardSpace({
 
   // Owner indicator: inset colored border via boxShadow
   const ownerShadow = spaceState?.ownerId
-    ? `inset 0 0 0 2px ${colorHex || "#888"}40`
+    ? `inset 0 0 0 1.5px ${colorHex || "#888"}50`
     : undefined;
 
   // Mortgage indicator: diagonal stripe overlay via linear-gradient
   const mortgageOverlay = spaceState?.isMortgaged
-    ? "repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(128,128,128,0.25) 3px, rgba(128,128,128,0.25) 5px)"
+    ? "repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(120,120,120,0.15) 3px, rgba(120,120,120,0.15) 5px)"
     : undefined;
 
   // Tooltip content
@@ -68,12 +68,15 @@ export function BoardSpace({
 
   return (
     <div
-      className={`relative border border-arcane-gold/10 cursor-pointer hover:bg-white/10 hover:border-arcane-gold/30 transition-colors overflow-hidden flex flex-col ${
+      className={`relative cursor-pointer transition-all duration-150 overflow-hidden flex flex-col hover:bg-white/[0.06] ${
         isCorner ? "p-1" : "p-0.5"
       }`}
       style={{
         gridRow,
         gridColumn: gridCol,
+        background: "rgba(13, 5, 32, 0.4)",
+        borderRight: "0.5px solid rgba(212, 168, 67, 0.08)",
+        borderBottom: "0.5px solid rgba(212, 168, 67, 0.08)",
         boxShadow: ownerShadow,
         backgroundImage: mortgageOverlay,
       }}
@@ -85,14 +88,17 @@ export function BoardSpace({
         <div
           className={`absolute ${
             side === "bottom"
-              ? "top-0 left-0 right-0 h-[8px]"
+              ? "top-0 left-0 right-0 h-[10px]"
               : side === "top"
-                ? "bottom-0 left-0 right-0 h-[8px]"
+                ? "bottom-0 left-0 right-0 h-[10px]"
                 : side === "left"
-                  ? "top-0 right-0 bottom-0 w-[8px]"
-                  : "top-0 left-0 bottom-0 w-[8px]"
-          } shadow-[inset_0_-1px_2px_rgba(0,0,0,0.3)]`}
-          style={{ backgroundColor: colorHex }}
+                  ? "top-0 right-0 bottom-0 w-[10px]"
+                  : "top-0 left-0 bottom-0 w-[10px]"
+          }`}
+          style={{
+            backgroundColor: colorHex,
+            boxShadow: "inset 0 0 6px rgba(255,255,255,0.15)",
+          }}
         />
       )}
 
@@ -104,7 +110,7 @@ export function BoardSpace({
       >
         {/* Icon for special spaces */}
         {!isProperty && (
-          <span className="text-[10px] leading-none">
+          <span className="text-[10px] leading-none opacity-80">
             {SPECIAL_ICONS[space.type] || ""}
           </span>
         )}
@@ -113,42 +119,42 @@ export function BoardSpace({
         <span
           className={`font-display leading-tight text-center ${
             isCorner ? "text-[10px]" : "text-[8px]"
-          } text-parchment`}
+          } text-parchment/90`}
         >
           {space.name}
         </span>
 
         {/* Price */}
         {space.cost && space.type !== "tax" && (
-          <span className="text-[7px] text-arcane-gold/60">
+          <span className="text-[7px] text-arcane-gold/50 font-display">
             {"\u265B"}{space.cost}
           </span>
         )}
         {space.type === "tax" && (
-          <span className="text-[7px] text-red-400">
+          <span className="text-[7px] text-red-400/80">
             -{space.cost}{"\u265B"}
           </span>
         )}
 
-        {/* Buildings - CSS dots instead of emoji */}
+        {/* Buildings - gem-like dots */}
         {spaceState && spaceState.towers > 0 && !spaceState.hasFortress && (
           <div className="flex gap-[2px] mt-[1px]">
             {Array.from({ length: spaceState.towers }).map((_, i) => (
               <div
                 key={i}
-                className="w-[5px] h-[5px] rounded-full bg-emerald-400"
+                className="w-[5px] h-[5px] rounded-full bg-emerald-400 shadow-[0_0_4px_rgba(52,211,153,0.5)]"
               />
             ))}
           </div>
         )}
         {spaceState?.hasFortress && (
-          <div className="w-[7px] h-[7px] rounded-full bg-red-500 mt-[1px]" />
+          <div className="w-[7px] h-[7px] rounded-sm bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.5)] mt-[1px]" />
         )}
       </div>
 
       {/* Players on this space - dedicated bottom row */}
       {playersOnSpace.length > 0 && (
-        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-px px-px py-[1px] bg-black/30">
+        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-px px-px py-[1px] bg-black/40">
           {visibleTokens.map((player) => (
             <span key={player.id} className="text-[10px] leading-none" title={player.name}>
               {TOKEN_EMOJIS[player.token] || "\u26AA"}

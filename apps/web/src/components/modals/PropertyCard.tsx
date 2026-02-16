@@ -34,17 +34,18 @@ export function PropertyCard({
           animate={{ scale: 1, opacity: 1, rotateY: 0 }}
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: "spring", damping: 20 }}
-          className="modal-container modal-ornament-tl modal-ornament-br relative w-72 overflow-hidden"
+          className="modal-container ornament-corners relative w-80 overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Color Header */}
           <div
             className="p-4 text-center"
             style={{
-              background: `linear-gradient(135deg, ${colorHex}, ${colorHex}cc)`,
+              background: `linear-gradient(145deg, ${colorHex}dd, ${colorHex}88)`,
+              boxShadow: "inset 0 -2px 10px rgba(0,0,0,0.3)",
             }}
           >
-            <h3 className="font-display text-white text-lg font-bold drop-shadow-lg">
+            <h3 className="font-display text-white text-lg font-bold drop-shadow-md">
               {space.name}
             </h3>
           </div>
@@ -54,14 +55,16 @@ export function PropertyCard({
             {space.type === "property" && space.rent && (
               <>
                 <div className="text-center">
-                  <span className="text-arcane-gold font-display text-xl">
+                  <span className="text-arcane-gold-light font-display text-xl text-glow-gold-subtle">
                     {"\u265B"}{space.cost}
                   </span>
                 </div>
 
                 <div className="divider-gold" />
 
-                <table className="w-full text-xs text-gray-300">
+                <p className="text-center text-parchment/50 text-xs">{"\u265B"} cost</p>
+
+                <table className="w-full text-xs text-parchment/70">
                   <tbody>
                     {[
                       ["Base Rent", space.rent[0]],
@@ -73,10 +76,10 @@ export function PropertyCard({
                     ].map(([label, value], i) => (
                       <tr
                         key={i}
-                        className={`${i < 5 ? "border-b border-gray-700/50" : ""} ${i % 2 === 1 ? "bg-white/5" : ""}`}
+                        className={`${i < 5 ? "border-b border-arcane-gold/5" : ""} ${i % 2 === 1 ? "bg-white/[0.03]" : ""}`}
                       >
                         <td className="py-1">{label}</td>
-                        <td className="py-1 text-right text-white">
+                        <td className="py-1 text-right text-parchment font-display">
                           {"\u265B"}{value}
                         </td>
                       </tr>
@@ -86,7 +89,7 @@ export function PropertyCard({
 
                 <div className="divider-gold" />
 
-                <div className="text-xs text-gray-400 space-y-1">
+                <div className="text-xs text-parchment/50 space-y-1">
                   <div className="flex justify-between">
                     <span>Tower Cost</span>
                     <span>{"\u265B"}{space.houseCost}</span>
@@ -101,8 +104,8 @@ export function PropertyCard({
 
             {/* Portal station */}
             {space.type === "portal" && (
-              <div className="text-xs text-gray-300 space-y-1">
-                <p className="text-center text-arcane-gold font-display">
+              <div className="text-xs text-parchment/70 space-y-1">
+                <p className="text-center text-arcane-gold-light font-display text-glow-gold-subtle">
                   {"\u265B"}{space.cost}
                 </p>
                 <p>1 Portal owned: {"\u265B"}25 rent</p>
@@ -114,8 +117,8 @@ export function PropertyCard({
 
             {/* Mana Well */}
             {space.type === "mana-well" && (
-              <div className="text-xs text-gray-300 space-y-1">
-                <p className="text-center text-arcane-gold font-display">
+              <div className="text-xs text-parchment/70 space-y-1">
+                <p className="text-center text-arcane-gold-light font-display text-glow-gold-subtle">
                   {"\u265B"}{space.cost}
                 </p>
                 <p>1 Well owned: 4x dice roll</p>
@@ -128,8 +131,8 @@ export function PropertyCard({
               <>
                 <div className="divider-gold" />
                 <div className="text-center text-xs pt-1">
-                  <span className="text-gray-400">Owned by </span>
-                  <span className="text-white">
+                  <span className="text-parchment/50">Owned by </span>
+                  <span className="text-parchment/80">
                     {TOKEN_EMOJIS[owner.token]} {owner.name}
                   </span>
                 </div>
@@ -159,7 +162,7 @@ export function PropertyCard({
 
           <button
             onClick={onClose}
-            className="w-full py-3 bg-arcane-dark hover:bg-gray-800 text-gray-300 text-sm font-display border-t border-arcane-gold/20 transition-colors"
+            className="w-full py-3 font-display text-sm text-parchment/50 hover:text-parchment/80 hover:bg-white/[0.03] transition-all border-t border-arcane-gold/10"
           >
             Close
           </button>
